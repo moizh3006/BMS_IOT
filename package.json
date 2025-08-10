@@ -1,0 +1,34 @@
+cat > package.json << 'EOF'
+{
+  "name": "bms-iot",
+  "version": "1.0.0",
+  "description": "BMS IoT Web Application (Portable EXE)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.bms.iot",
+    "productName": "BMS IoT",
+    "win": {
+      "target": "portable"
+    },
+    "files": [
+      "**/*",
+      "bms.db"
+    ]
+  },
+  "dependencies": {
+    "electron": "^28.0.0",
+    "fastify": "^4.25.2",
+    "fastify-static": "^6.10.2",
+    "sqlite3": "^5.1.6",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.6.4"
+  }
+}
+EOF

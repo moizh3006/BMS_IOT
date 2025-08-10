@@ -1,0 +1,42 @@
+cat > public/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BMS IoT Dashboard</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    #logo { height: 60px; }
+    .widget { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h1>BMS IoT Dashboard</h1>
+  <img id="logo" src="" alt="Brand Logo">
+  <div>
+    <input type="file" id="logoInput">
+    <button onclick="uploadLogo()">Upload Logo</button>
+  </div>
+  <hr>
+  <div id="widgets">
+    <div class="widget">Temperature: 25°C</div>
+    <div class="widget">Humidity: 45%</div>
+  </div>
+  <script>
+    async function loadLogo() {
+      const res = await fetch('/api/logo');
+      const data = await res.json();
+      if (data.logo) document.getElementById('logo').src = data.logo;
+    }
+    async function uploadLogo() {
+      const file = document.getElementById('logoInput').files[0];
+      const formData = new FormData();
+      formData.append('logo', file);
+      await fetch('/api/upload-logo', { method: 'POST', body: formData });
+      loadLogo();
+    }
+    loadLogo();
+  </script>
+</body>
+</html>
+EOF
