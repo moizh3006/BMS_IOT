@@ -5,8 +5,9 @@ cat > package.json << 'EOF'
   "description": "BMS IoT Web Application (Portable EXE)",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "build:win": "electron-builder --win portable"
+  "start": "electron .",
+  "build:win": "electron-builder --win portable"
+}
   },
   "build": {
     "appId": "com.bms.iot",
